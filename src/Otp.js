@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -14,8 +14,11 @@ import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 import firebase from 'firebase/compat/app';
 import { firebaseConfig } from '../config';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import { AppContext } from '../Context';
 
 const Otp = () => {
+  const { Gname } = AppContext();
   const navigation = useNavigation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -29,39 +32,58 @@ const Otp = () => {
   const [showOtpVerification, setShowOtpVerification] = useState(false);
   const recaptchaVerifier = useRef(null);
 
-  const sendVerification = () => {
-    // Your form validation logic here
+  const sendVerification = async () => {
     if (name && email && phno && aadharNumber && password && confirmPassword) {
-      const phoneProvider = new firebase.auth.PhoneAuthProvider();
+      try {
+        const phoneProvider = new firebase.auth.PhoneAuthProvider();
+        const verificationId = await phoneProvider.verifyPhoneNumber(
+          `${countryCode}${phno}`,
+          recaptchaVerifier.current
+        );
 
-      phoneProvider.verifyPhoneNumber(
-        `${countryCode}${phno}`,
-        recaptchaVerifier.current
-      ).then(setVerifyID);
-      setPhno('');
-      setShowOtpVerification(true);
+        setVerifyID(verificationId);
+        setShowOtpVerification(true);
+      } catch (error) {
+        console.error('Error sending verification code:', error);
+        Alert.alert('Error sending verification code. Please try again.');
+      }
     } else {
       Alert.alert('Please fill in all fields before sending verification.');
     }
   };
 
-  const confirmCode = () => {
-    const credential = firebase.auth.PhoneAuthProvider.credential(
-      verfyID,
-      otp
-    );
-    firebase.auth().signInWithCredential(credential).then(() => {
+  const confirmCode = async () => {
+    try {
+      const credential = firebase.auth.PhoneAuthProvider.credential(
+        verfyID,
+        otp
+      );
+  
+      // Try to sign in with the provided OTP
+      await firebase.auth().signInWithCredential(credential);
       setOtp('');
       setShowOtpVerification(false);
-      Alert.alert('Login Successfully');
+  
+      // If sign in is successful, make the API call
+      const response = await axios.post('http://localhost:3000/signup', {
+        name,
+        email,
+        phno,
+        aadharNumber,
+        password,
+      });
+  
+      console.log('User signed up successfully:', response.data);
+  
+      // If the API call is successful, navigate to the 'Home' screen
       navigation.navigate('Home');
-    }).catch((err) => {
-      alert(err);
+    } catch (err) {
+      console.error('Error confirming OTP or making API call:', err);
       setShowOtpVerification(false);
-      Alert.alert('OTP Mismatch');
-    });
+      Alert.alert('OTP Mismatch or API call failed. Please try again.');
+    }
   };
-
+  
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <View style={styles.container}>
@@ -70,7 +92,14 @@ const Otp = () => {
           style={styles.icon}
           resizeMode="contain"
         />
-        <Text style={styles.headerText}>Sign Up</Text>
+        <TouchableOpacity
+          style={styles.sendVerification}
+          onPress={() => navigation.navigate('Home')}
+        >
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.headerText}>{Gname} Sign Up</Text>
 
         <FirebaseRecaptchaVerifierModal
           ref={recaptchaVerifier}
@@ -142,7 +171,9 @@ const Otp = () => {
               <Text style={styles.buttonText}>Confirm Verification</Text>
             </TouchableOpacity>
           </View>
-        ):<View></View>}
+        ) : (
+          <View></View>
+        )}
       </View>
     </ScrollView>
   );
