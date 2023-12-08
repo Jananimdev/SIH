@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>{Gname} Welcome to Home!</Text>
-      <TouchableOpacity onPress={handleGetRequest}>
+      {/* <TouchableOpacity onPress={handleGetRequest}>
         <View
           style={{
             backgroundColor: '#3498db',
@@ -39,7 +39,7 @@ const Home = () => {
           <Text>Response from the server:</Text>
           <Text>{JSON.stringify(responseData)}</Text>
         </View>
-      )}
+      )} */}
     </View>
   );
 };

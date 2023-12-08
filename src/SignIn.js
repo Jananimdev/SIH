@@ -73,8 +73,7 @@ const SignIn = () => {
   };
 
   const handleSubmit = () => {
-    Alert.alert(usersList.toString)
-    Alert.alert(user,pass)
+   
 
     if (isAuth(user, pass)) {
       navigation.navigate('Home');
