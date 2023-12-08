@@ -65,7 +65,7 @@ const Otp = () => {
       setShowOtpVerification(false);
   
       // If sign in is successful, make the API call
-      const response = await axios.post('http://localhost:3000/signup', {
+      const response = await axios.post('https://projectgg-server.onrender.com/signup', {
         name,
         email,
         phno,
@@ -97,6 +97,12 @@ const Otp = () => {
           onPress={() => navigation.navigate('Home')}
         >
           <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.sendVerification}
+          onPress={() => navigation.navigate('SignIn')}
+        >
+          <Text style={styles.buttonText}>SignIn</Text>
         </TouchableOpacity>
 
         <Text style={styles.headerText}>{Gname} Sign Up</Text>

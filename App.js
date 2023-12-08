@@ -4,11 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Otp from './src/Otp';
 import Home from './src/Home';
 import { AuthContext } from './Context';
+import SignIn from './src/SignIn';
 
 
 
 export default function App() {
-  const [Gname, setGName] = useState('Sami');
+  const [Gname, setGName] = useState('Sami2');
   const [Gemail, setGEmail] = useState('');
   const [Gpassword, setGPassword] = useState('');
   const [Gphno, setGPhno] = useState('');
@@ -36,6 +37,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Otp">
           <Stack.Screen name="Otp" component={Otp} />
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="SignIn" component={SignIn} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

@@ -9,7 +9,7 @@ const Home = () => {
 
   const handleGetRequest = async () => {
     try {
-      const response = await axios.get('http://192.168.1.2:3000/signin'); // Replace with your machine's IP
+      const response = await axios.get('http://192.180.180.270:3000/signin'); // Replace with your machine's IP
       setResponseData(response.data);
       Alert.alert('GET request successful!');
     } catch (error) {
