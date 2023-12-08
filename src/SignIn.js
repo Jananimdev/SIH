@@ -21,9 +21,12 @@ const SignIn = () => {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
+  const [user,setUser] = useState("")
+  const [pass,setPass] = useState("")
+
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://projectgg-server.onrender.com/signin');
+      const response = await axios.get('https://projectgg-server.onrender.com/users');
       console.log(response.data);
       setUsersList(response.data);
       setLoading(false);
@@ -38,8 +41,9 @@ const SignIn = () => {
   }, []);
 
   const isAuth = (user, pass) => {
-    var r = 0;
 
+    var r = 0;
+    
     if (usersList.length) {
       usersList.map((item) => {
         if (item.email === user && item.password === pass) {
@@ -69,7 +73,10 @@ const SignIn = () => {
   };
 
   const handleSubmit = () => {
-    if (isAuth(Gemail, Gpassword)) {
+    Alert.alert(usersList.toString)
+    Alert.alert(user,pass)
+
+    if (isAuth(user, pass)) {
       navigation.navigate('Home');
     }
   };
@@ -84,13 +91,13 @@ const SignIn = () => {
         <View>
           <TextInput
             placeholder="Email"
-            onChangeText={setGEmail}
+            onChangeText={setUser}
             style={styles.textInput}
           />
 
           <TextInput
             placeholder="Password"
-            onChangeText={setGPassword}
+            onChangeText={setPass}
             secureTextEntry
             style={styles.textInput}
           />
