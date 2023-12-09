@@ -13,9 +13,9 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator initialRouteName="SignIn" headerMode="none">
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
+    <Stack.Navigator initialRouteName="Sign In" headerMode="none">
+      <Stack.Screen name="Sign In" component={SignIn} />
+      <Stack.Screen name="Sign Up" component={SignUp} />
     </Stack.Navigator>
   );
 };
@@ -56,20 +56,20 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="SignIn"
+        name="LOG IN"
         component={AuthStack}
         options={{
-          tabBarLabel: 'SignIn',
+          tabBarLabel: 'LOG IN',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="sign-in" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="SignUp"
+        name="SIGN UP"
         component={SignUp}
         options={{
-          tabBarLabel: 'SignUp',
+          tabBarLabel: 'SIGN UP',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="user-plus" color={color} size={size} />
           ),

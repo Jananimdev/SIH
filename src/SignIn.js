@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert, Image } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { AppContext } from '../Context';
@@ -21,8 +21,8 @@ const SignIn = () => {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
-  const [user,setUser] = useState("")
-  const [pass,setPass] = useState("")
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
 
   const fetchData = async () => {
     try {
@@ -38,12 +38,11 @@ const SignIn = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [usersList]);
 
   const isAuth = (user, pass) => {
-
     var r = 0;
-    
+
     if (usersList.length) {
       usersList.map((item) => {
         if (item.email === user && item.password === pass) {
@@ -73,8 +72,6 @@ const SignIn = () => {
   };
 
   const handleSubmit = () => {
-   
-
     if (isAuth(user, pass)) {
       navigation.navigate('Home');
     }
@@ -82,7 +79,12 @@ const SignIn = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>SIGN IN</Text>
+      <Image
+        source={require('./icon.png')}
+        style={styles.icon}
+        resizeMode="contain"
+      />
+      <Text style={styles.headerText}>LOG IN</Text>
 
       {loading ? (
         <Text>Loading...</Text>
@@ -109,10 +111,6 @@ const SignIn = () => {
           </TouchableOpacity>
         </View>
       )}
-
-      <Text style={styles.textCenter}>
-        Not a member? <Text onPress={() => navigation.navigate('SignUp')}>Register</Text>
-      </Text>
     </View>
   );
 };
@@ -126,6 +124,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  icon: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+    borderRadius: 50,
+    marginTop: 20,
+  },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -137,26 +142,29 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 20,
     fontSize: 18,
-    borderBottomColor: 'white',
-    borderBottomWidth: 2,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderWidth: 1,
+    borderRadius: 10,
     marginBottom: 20,
-    textAlign: 'center',
+    // textAlign: 'center',
     color: 'black',
+    width:300
   },
   sendVerification: {
     padding: 20,
     backgroundColor: '#3498db',
     borderRadius: 10,
     marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonText: {
     textAlign: 'center',
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
-  },
-  textCenter: {
-    textAlign: 'center',
-    marginTop: 20,
   },
 });
