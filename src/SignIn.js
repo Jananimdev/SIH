@@ -118,53 +118,75 @@ const SignIn = () => {
 export default SignIn;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  icon: {
-    width: 100,
-    height: 100,
-    marginBottom: 20,
-    borderRadius: 50,
-    marginTop: 20,
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'black',
-    marginBottom: 20,
-  },
-  textInput: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingHorizontal: 20,
-    fontSize: 18,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-    borderWidth: 1,
-    borderRadius: 10,
-    marginBottom: 20,
-    // textAlign: 'center',
-    color: 'black',
-    width:300
-  },
-  sendVerification: {
-    padding: 20,
-    backgroundColor: '#3498db',
-    borderRadius: 10,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-});
+    scrollViewContainer: {
+      flexGrow: 1,
+    },
+    backgroundImage: {
+      flex: 1,
+      width: "100%",
+      height: "100%",
+    },
+    container: {
+      flex: 1,
+      backgroundColor: "white",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 20,
+    },
+    icon: {
+      width: 100,
+      height: 100,
+      marginBottom: 20,
+      borderRadius: 50,
+      marginTop: 20,
+    },
+    headerText: {
+      fontSize: 24,
+      fontWeight: "bold",
+      color: "black",
+      marginBottom: 20,
+    },
+    inputContainer: {
+      width: 300,
+      marginBottom: 15,
+    },
+    textInput: {
+      width: 300,
+      paddingTop: 15,
+      paddingBottom: 15,
+      paddingHorizontal: 20,
+      fontSize: 18,
+      borderColor: "rgba(0, 0, 0, 0.1)",
+      borderWidth: 1,
+      borderRadius: 10,
+      marginBottom: 15,
+    //   textAlign: "center",
+      color: "black",
+    },
+    sendVerification: {
+      width: 300,
+      padding: 20,
+      backgroundColor: "#3498db",
+      borderRadius: 10,
+      marginBottom: 20,
+    },
+    sendCode: {
+      width: 300,
+      padding: 20,
+      backgroundColor: "#9b59b6",
+      borderRadius: 10,
+    },
+    buttonText: {
+      textAlign: "center",
+      color: "white",
+      fontWeight: "bold",
+      fontSize: 18,
+    },
+    modalHeaderText: {
+      fontSize: 24,
+      fontWeight: "bold",
+      color: "black",
+      marginBottom: 20,
+    },
+  });
+  
