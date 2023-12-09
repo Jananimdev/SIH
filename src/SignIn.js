@@ -27,7 +27,6 @@ const SignIn = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get('https://projectgg-server.onrender.com/users');
-      console.log(response.data);
       setUsersList(response.data);
       setLoading(false);
     } catch (error) {
