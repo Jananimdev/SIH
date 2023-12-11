@@ -32,6 +32,8 @@ const Otp = () => {
   const [otp, setOtp] = useState("");
   const [verfyID, setVerifyID] = useState(null);
   const [showOtpVerification, setShowOtpVerification] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
+
   const recaptchaVerifier = useRef(null);
 
   const sendVerification = async () => {
@@ -73,6 +75,7 @@ const Otp = () => {
         phno,
         aadharNumber,
         password,
+        isAdmin,
       });
 
       console.log("User signed up successfully:", response.data);
