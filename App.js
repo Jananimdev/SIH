@@ -9,6 +9,10 @@ import SignIn from './src/SignIn';
 import Home from './src/Home';
 import { HomeAdmin } from './src/HomeAdmin';
 import { BottomTab } from './src/BottomTabNav/BottomTab';
+import { RunningVehiclesPage } from './src/Riding';
+import { TotalVehicles } from './src/TotalVehicles';
+import { StationedVehicles } from './src/Stationed';
+import { VehicleDetails } from './src/VehicleDetails';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -57,6 +61,11 @@ export default function App() {
           component={BottomTab}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="Riding" component={RunningVehiclesPage} options={{ title: 'Riding' }} />
+        <Stack.Screen name="TotalVehicles" component={TotalVehicles} options={{ title: 'TotalVehicles' }} />
+        <Stack.Screen name="Stationed" component={StationedVehicles} options={{ title: 'Stationed' }} />
+        <Stack.Screen name="VehicleDetails" component={VehicleDetails} />
+     
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

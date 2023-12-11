@@ -77,7 +77,7 @@ const SignIn = () => {
 
   const handleSubmit = () => {
     if (isAuth(user, pass)) {
-     isGAdmin? navigation.navigate('HomeAdmin'):navigation.navigate('HomeScreen');
+     !isGAdmin? navigation.navigate('HomeAdmin'):navigation.navigate('HomeScreen');
     }
   };
 
