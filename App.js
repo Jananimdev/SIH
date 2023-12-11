@@ -7,14 +7,13 @@ import SignUp from './src/SignUp';
 import { AuthContext } from './Context';
 import SignIn from './src/SignIn';
 import Home from './src/Home';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
+//
 const AuthStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Sign In" screenOptions={{headerShown:false}}>
       <Stack.Screen name="Sign In" component={SignIn} />
       <Stack.Screen name="Sign Up" component={SignUp} />
     </Stack.Navigator>
@@ -43,32 +42,39 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={authContextValue}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Tab.Navigator screenOptions={{ headerShown: false }}>
-            <Tab.Screen
-              name="LOG IN"
-              component={AuthStack}
-              options={{
-                tabBarLabel: 'LOG IN',
-                tabBarIcon: ({ color, size }) => (
-                  <FontAwesome name="sign-in" color={color} size={size} />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="SIGN UP"
-              component={SignUp}
-              options={{
-                tabBarLabel: 'SIGN UP',
-                tabBarIcon: ({ color, size }) => (
-                  <FontAwesome name="user-plus" color={color} size={size} />
-                ),
-              }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Tabs"  screenOptions={{headerShown:false}} >
+          <Stack.Screen name="Tabs" component={TabNavigator} />
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </AuthContext.Provider>
   );
 }
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator screenOptions={{headerShown:false}} >
+      <Tab.Screen
+        name="LOG IN"
+        component={AuthStack}
+        options={{
+          tabBarLabel: 'LOG IN',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="sign-in" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="SIGN UP"
+        component={SignUp}
+        options={{
+          tabBarLabel: 'SIGN UP',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user-plus" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
