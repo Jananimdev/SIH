@@ -7,6 +7,8 @@ import SignUp from './src/SignUp';
 import { AuthContext } from './Context';
 import SignIn from './src/SignIn';
 import Home from './src/Home';
+import { HomeAdmin } from './src/HomeAdmin';
+import { BottomTab } from './src/BottomTabNav/BottomTab';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -26,6 +28,7 @@ export default function App() {
   const [Gpassword, setGPassword] = useState('');
   const [Gphno, setGPhno] = useState('');
   const [GaadharNumber, setGAadharNumber] = useState('');
+  const [isGAdmin, setGAdmin] = useState('');
 
   const authContextValue = {
     Gname,
@@ -38,6 +41,8 @@ export default function App() {
     setGPhno,
     GaadharNumber,
     setGAadharNumber,
+    isGAdmin,
+    setGAdmin,
   };
 
   return (
@@ -45,7 +50,13 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Tabs"  screenOptions={{headerShown:false}} >
           <Stack.Screen name="Tabs" component={TabNavigator} />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="HomeScreen" component={Home} />
+          <Stack.Screen name="HomeAdmin" component={HomeAdmin} />
+          <Stack.Screen
+          name="NextPage"
+          component={BottomTab}
+          options={{ headerShown: false }}
+        />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

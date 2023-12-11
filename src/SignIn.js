@@ -16,6 +16,8 @@ const SignIn = () => {
     setGPhno,
     GaadharNumber,
     setGAadharNumber,
+    isGAdmin,
+    setGAdmin,
   } = AppContext();
   const [usersList, setUsersList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,10 +48,12 @@ const SignIn = () => {
     if (usersList.length) {
       usersList.map((item) => {
         if (item.email === user && item.password === pass) {
-          console.log(item.username);
+          
           setGName(item.username);
           setGPhno(item.phno);
           setGAadharNumber(item.aadharNumber);
+          setGAdmin(item.isAdmin)
+          
           r = 1;
         } else if (item.email === user && item.password !== pass) {
           r = 2;
@@ -73,7 +77,7 @@ const SignIn = () => {
 
   const handleSubmit = () => {
     if (isAuth(user, pass)) {
-      navigation.navigate('Home');
+     isGAdmin? navigation.navigate('HomeAdmin'):navigation.navigate('HomeScreen');
     }
   };
 

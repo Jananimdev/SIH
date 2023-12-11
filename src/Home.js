@@ -1,47 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import axios from 'axios';
-import { AppContext } from '../Context';
+// HomeScreen.js
+import React from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 
-const Home = () => {
-  const { Gname } = AppContext();
-  const [responseData, setResponseData] = useState(null);
+const Home = ({ navigation }) => {
+  const [vehicleID, setVehicleID] = React.useState("");
 
-  const handleGetRequest = async () => {
-    try {
-      const response = await axios.get('http://192.180.180.270:3000/signin'); // Replace with your machine's IP
-      setResponseData(response.data);
-      Alert.alert('GET request successful!');
-    } catch (error) {
-      console.error('Error making GET request:', error);
-      Alert.alert(`Error making GET request: ${error.message}`);
-    }
+  const handleContinue = () => {
+    navigation.navigate("NextPage", { vehicleID });
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>{Gname} Welcome to Home!</Text>
-      {/* <TouchableOpacity onPress={handleGetRequest}>
-        <View
-          style={{
-            backgroundColor: '#3498db',
-            padding: 10,
-            borderRadius: 5,
-            marginTop: 20,
-          }}
-        >
-          <Text style={{ color: 'white' }}>Make GET Request</Text>
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.label}>Enter the Vehicle ID:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Vehicle ID"
+        value={vehicleID}
+        onChangeText={setVehicleID}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleContinue}>
+        <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
-
-      {responseData && (
-        <View style={{ marginTop: 20 }}>
-          <Text>Response from the server:</Text>
-          <Text>{JSON.stringify(responseData)}</Text>
-        </View>
-      )} */}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  input: {
+    height: 40,
+    width: "100%",
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  button: {
+    backgroundColor: "blue",
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
+  },
+});
 
 export default Home;
