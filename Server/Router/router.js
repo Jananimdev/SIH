@@ -18,8 +18,8 @@ router.post('/signup', async (req, res) => {
   try {
     console.log("Called");
     // res.sent("Hehhh")
-    const { name, email, password, phno, aadharNumber } = req.body;
-    const newUser = new User({ name, email, password, phno, aadharNumber });
+    const { name, email, password, phno, aadharNumber,isAdmin } = req.body;
+    const newUser = new User({ name, email, password, phno, aadharNumber,isAdmin });
     await newUser.save();
     res.status(201).json({ message: 'User signed up successfully' });
   } catch (error) {
