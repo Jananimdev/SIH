@@ -17,7 +17,6 @@ import { firebaseConfig } from "../config";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { AppContext } from "../Context";
-import BGImage from './BG.jpeg'
 
 const Otp = () => {
   const { Gname } = AppContext();

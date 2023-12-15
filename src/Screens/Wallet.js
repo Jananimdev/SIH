@@ -5,17 +5,23 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Alert,
+  Button,
 } from "react-native";
+import App from "../../App";
+import { AppContext } from "../../Context";
 
 const Wallet = () => {
+
+  const con = AppContext()
   const [credits, setCredits] = useState([
-    { id: 1, amount: 100 },
-    { id: 2, amount: 200 },
-    { id: 3, amount: 500 },
-    { id: 4, amount: 1000 },
+    { id: 1, amount: 10 },
+    { id: 2, amount: 20 },
+    { id: 3, amount: 50 },
+    { id: 4, amount: 100 },
   ]);
 
-  const walletBalance = 200;
+  const walletBalance = con.cash;
   const transactionHistory = [
     {
       id: 1,
@@ -42,13 +48,17 @@ const Wallet = () => {
 
   const handleCreditPurchase = (amount) => {
     console.log(`Purchased ${amount} credits`);
-    setWalletBalance(walletBalance + amount);
+   
   };
 
   const renderCreditItem = ({ item }) => (
     <TouchableOpacity
       style={styles.creditItem}
-      onPress={() => handleCreditPurchase(item.amount)}
+      onPress={() => {
+        
+        con.setCash(item.amount+con.cash)
+        Alert.alert(`Amount RS.${item.amount} Added`)
+      }}
     >
       <Text style={styles.creditAmount}>Buy {item.amount} Credits</Text>
     </TouchableOpacity>
@@ -58,7 +68,17 @@ const Wallet = () => {
     <View style={styles.container}>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Wallet Balance</Text>
-        <Text style={styles.amount}>${walletBalance}</Text>
+        <Text style={styles.amount}>Rs.{walletBalance}</Text>
+        {walletBalance===0?(
+        <Button
+        color="red"
+          title="Recharge 200 instant"
+          onPress={()=>{
+              con.setCash(200)
+              Alert.alert("Recharged")
+          }}
+          // style={}
+        />):""}
       </View>
 
       <View style={styles.creditsContainer}>

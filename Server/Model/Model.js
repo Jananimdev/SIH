@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   phno: String,
   aadharNumber: String,
-  isAdmin:String,
+  isAdmin:Boolean,
 });
 
 const User = mongoose.model('User', userSchema);

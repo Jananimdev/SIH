@@ -6,17 +6,30 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Image,
+  Alert, // Import Alert from React Native
 } from "react-native";
 
 const Home = ({ navigation }) => {
   const [vehicleID, setVehicleID] = React.useState("");
 
   const handleContinue = () => {
-    navigation.navigate("NextPage", { vehicleID });
+    const allowedVehicleIDs = ["v1", "v2", "v3"];
+
+    if (allowedVehicleIDs.includes(vehicleID)) {
+      navigation.navigate("NextPage", { vehicleID });
+    } else {
+      Alert.alert("Error", "Enter the correct vehicle ID");
+    }
   };
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require('./icon.png')}
+        style={styles.icon}
+        resizeMode="contain"
+      />
       <Text style={styles.label}>Enter the Vehicle ID:</Text>
       <TextInput
         style={styles.input}
@@ -38,9 +51,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
+  icon: {
+    width: 100,
+    height: 100,
+    marginBottom: 80,
+    borderRadius: 50,
+  },
   label: {
     fontSize: 18,
     marginBottom: 10,
+    fontWeight: 'bold',
   },
   input: {
     height: 40,

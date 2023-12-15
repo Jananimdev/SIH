@@ -10,42 +10,31 @@ import {
   Button,
   TextInput,
   Text,
+  Alert,
 } from "react-native";
 import * as Location from "expo-location";
+import { AppContext } from "../../Context";
+import { useNavigation } from "@react-navigation/native";
 
 function Home() {
   const drawer = useRef(null);
+  const navigation = useNavigation();
+  const con = AppContext()
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
+
   const Stack = createStackNavigator();
 
+  const [isMarker,setIsMarker]=useState(false)
+
   const [mapRegion, setMapRegion] = useState({
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitude: 20.5937,
+    longitude: 78.9629,
+    latitudeDelta: 20,
+    longitudeDelta: 20,
   });
-
-  useEffect(() => {
-    // Request location permissions when the component mounts
-    requestLocationPermission();
-  }, []);
-
-  const requestLocationPermission = async () => {
-    try {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.error("Permission to access location denied");
-      } else {
-        executeUserLocation(); // If permission is granted, get user location
-      }
-    } catch (error) {
-      console.error("Error requesting location permission:", error);
-    }
-  };
-
   const userLocation = async () => {
     let { status } = await Location.requestBackgroundPermissionsAsync();
     if (status !== "granted") {
@@ -60,11 +49,26 @@ function Home() {
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     });
+    setIsMarker(true);
     console.log(location);
   };
   const executeUserLocation = () => {
     userLocation();
   };
+  useEffect(()=>{
+    userLocation();
+  },[])
+
+
+  const Reduce = ()=>{
+    if(con.cash==0){
+      Alert.alert("Please recharge your wallet!")
+    }
+    else if(con.cash>0){
+      con.setCash(con.cash-20)
+      navigation.navigate("Wallet");
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -72,7 +76,7 @@ function Home() {
         <Button title="=" onPress={() => drawer.current.openDrawer()} />
       </View>
       <MapView style={styles.map} region={mapRegion}>
-        <Marker coordinate={mapRegion} title="Marker"></Marker>
+       {isMarker && <Marker coordinate={mapRegion} title="Marker"></Marker>} 
       </MapView>
       <View style={styles.top}>
         <View style={styles.total}>
@@ -106,7 +110,7 @@ function Home() {
       <View style={styles.butContainer}>
         <Button
           title="Start"
-          //   onPress={}
+            onPress={Reduce}
           style={styles.but}
           color="red"
         />

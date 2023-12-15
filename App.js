@@ -16,7 +16,7 @@ import { VehicleDetails } from './src/VehicleDetails';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-//
+// Hello World
 const AuthStack = () => {
   return (
     <Stack.Navigator initialRouteName="Sign In" screenOptions={{headerShown:false}}>
@@ -33,6 +33,7 @@ export default function App() {
   const [Gphno, setGPhno] = useState('');
   const [GaadharNumber, setGAadharNumber] = useState('');
   const [isGAdmin, setGAdmin] = useState('');
+  const [cash, setCash] = useState(200);
 
   const authContextValue = {
     Gname,
@@ -47,6 +48,8 @@ export default function App() {
     setGAadharNumber,
     isGAdmin,
     setGAdmin,
+    cash,
+    setCash
   };
 
   return (

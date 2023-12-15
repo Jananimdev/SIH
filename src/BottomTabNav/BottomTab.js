@@ -13,10 +13,10 @@ export  function BottomTab() {
     // <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="MAPS"
         component={Home}
         options={{
-          tabBarLabel: "HOME",
+          tabBarLabel: "MAPS",
           tabBarIcon: ({ color, size }) => (
             <Icon name="home" size={30} color="black" />
           ),
