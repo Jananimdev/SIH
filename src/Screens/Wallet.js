@@ -69,12 +69,12 @@ const Wallet = () => {
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Wallet Balance</Text>
         <Text style={styles.amount}>Rs.{walletBalance}</Text>
-        {walletBalance===0?(
+        {walletBalance<20?(
         <Button
         color="red"
           title="Recharge 200 instant"
           onPress={()=>{
-              con.setCash(200)
+              con.setCash(con.cash+200)
               Alert.alert("Recharged")
           }}
           // style={}

@@ -47,6 +47,7 @@ const SignIn = () => {
       Alert.alert('Login Success');
       setGEmail(user);
       setGPassword(pass);
+      
       if (isAdmin === 'Yes') {
         navigation.navigate('HomeAdmin');
       } else {
@@ -69,7 +70,7 @@ const SignIn = () => {
     if (usersList.length) {
       usersList.map((item) => {
         if (item.email === user && item.password === pass) {
-          setGName(item.username);
+          setGName(item.name);
           setGPhno(item.phno);
           setGAadharNumber(item.aadharNumber);
           

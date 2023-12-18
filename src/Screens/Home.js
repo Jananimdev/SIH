@@ -61,10 +61,10 @@ function Home() {
 
 
   const Reduce = ()=>{
-    if(con.cash==0){
+    if(con.cash<20){
       Alert.alert("Please recharge your wallet!")
     }
-    else if(con.cash>0){
+    else if(con.cash>=20){
       con.setCash(con.cash-20)
       navigation.navigate("Wallet");
     }
