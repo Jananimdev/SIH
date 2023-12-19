@@ -35,12 +35,12 @@ export  function BottomTab() {
         }}
       />
       <Tab.Screen
-        name="Coupens"
+        name="Report"
         component={Coupens}
         options={{
-          tabBarLabel: "COUPENS",
+          tabBarLabel: "Report",
           tabBarIcon: ({ color, size }) => (
-            <Icon name="ticket" size={30} color="black" />
+            <Icon name="exclamation-circle" size={30} color="black" />
           ),
           tabBarLabelStyle: { color: "black" }, // Set the color of tabBarLabel
         }}

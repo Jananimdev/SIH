@@ -6,23 +6,24 @@ import { AppContext } from '../../Context';
 
 const SmsSender = () => {
   const [issueText, setIssueText] = useState('');
+  const { Gphno, Gname } = AppContext();
 
-  const {Gphno,Gname} = AppContext();
   const handleTextChange = (text) => {
     setIssueText(text);
   };
 
   const sid = 'AC32b8d07e47723d8ec994943c3b651cf9';
-  const token = '15a0e0b128a263e3ac1610c4ca5e3bf6';
+  const token = 'd018f2f6ca72ddefe32cf86c1fe7ea97';
+  const twilioPhoneNumber = '+18177178384'; // Your Twilio phone number
 
   const sendIssue = async () => {
     try {
       const credentials = base64Encode(`${sid}:${token}`);
-      const response = await axios.post(
+      const response1 = await axios.post(
         `https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`,
         {
-          To: '+919345577617', 
-          From: '+18177178384', 
+          To: '+919345577617', // Admin's phone number
+          From: twilioPhoneNumber,
           Body: `User's Details\nName : ${Gname}\nPhone Number : ${Gphno}\nIssues Faced : ${issueText}`,
         },
         {
@@ -33,7 +34,37 @@ const SmsSender = () => {
         }
       );
 
-      if (response.status === 201) {
+      const response2 = await axios.post(
+        `https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`,
+        {
+          To: '+919080163875', // Admin's phone number
+          From: twilioPhoneNumber,
+          Body: `User's Details\nName : ${Gname}\nPhone Number : ${Gphno}\nIssues Faced : ${issueText}`,
+        },
+        {
+          headers: {
+            Authorization: 'Basic ' + credentials,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      );
+
+      const response3 = await axios.post(
+        `https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`,
+        {
+          To: '+917010988346', // Admin's phone number
+          From: twilioPhoneNumber,
+          Body: `User's Details\nName : ${Gname}\nPhone Number : ${Gphno}\nIssues Faced : ${issueText}`,
+        },
+        {
+          headers: {
+            Authorization: 'Basic ' + credentials,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      );
+
+      if (response1.status === 201 && response2.status === 201 && response3.status === 201) {
         Alert.alert('Issue sent successfully!');
         setIssueText('');
       } else {
@@ -82,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: 'white',
     borderRadius: 8,
-    textAlign:'center'
+    textAlign: 'center',
   },
 });
 

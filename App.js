@@ -26,6 +26,8 @@ const AuthStack = () => {
   );
 };
 
+//
+
 export default function App() {
   const [Gname, setGName] = useState('');
   const [Gemail, setGEmail] = useState('');
