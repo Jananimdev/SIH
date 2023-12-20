@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import MapView, { Marker } from "react-native-maps";
 import { createStackNavigator } from "@react-navigation/stack";
+import axios from "axios";
 import Coupens from "./Coupens";
 import Wallet from "./Wallet";
 import {
@@ -23,6 +24,8 @@ function Home() {
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+
+  const [message, setMessage] = useState('Start');
 
 
   const Stack = createStackNavigator();
@@ -60,11 +63,25 @@ function Home() {
   },[])
 
 
-  const Reduce = ()=>{
+  const Reduce = async ()=>{
     if(con.cash<20){
       Alert.alert("Please recharge your wallet!")
     }
     else if(con.cash>=20){
+
+
+  // const sendMessage = async () => {
+    try {
+      await axios.post('https://projectgg-server.onrender.com/receiveData', { message });
+      console.log('Message sent to Node server');
+    } catch (error) {
+      console.error('Error sending message to Node server:', error);
+    }
+  
+
+
+
+
       con.setCash(con.cash-20)
       navigation.navigate("Wallet");
     }
