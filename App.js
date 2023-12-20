@@ -13,6 +13,7 @@ import { RunningVehiclesPage } from './src/Riding';
 import { TotalVehicles } from './src/TotalVehicles';
 import { StationedVehicles } from './src/Stationed';
 import { VehicleDetails } from './src/VehicleDetails';
+import Map from './src/Screens/Map';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -35,7 +36,7 @@ export default function App() {
   const [Gphno, setGPhno] = useState('');
   const [GaadharNumber, setGAadharNumber] = useState('');
   const [isGAdmin, setGAdmin] = useState('');
-  const [cash, setCash] = useState(200);
+  const [cash, setCash] = useState(0);
 
   const authContextValue = {
     Gname,
@@ -60,6 +61,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Tabs"  screenOptions={{headerShown:false}} >
           <Stack.Screen name="Tabs" component={TabNavigator} />
           <Stack.Screen name="HomeScreen" component={Home} />
+          <Stack.Screen name="Map" component={Map} />
           <Stack.Screen name="HomeAdmin" component={HomeAdmin} />
           <Stack.Screen
           name="NextPage"

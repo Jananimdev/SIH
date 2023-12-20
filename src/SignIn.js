@@ -51,7 +51,7 @@ const SignIn = () => {
       if (isAdmin === 'Yes') {
         navigation.navigate('HomeAdmin');
       } else {
-        navigation.navigate('HomeScreen');
+        navigation.navigate('Map');
       }
       
     } else if (r === 2) {

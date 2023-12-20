@@ -13,9 +13,9 @@ const SmsSender = () => {
   };
 
   const sid = 'AC32b8d07e47723d8ec994943c3b651cf9';
-  const token = 'd018f2f6ca72ddefe32cf86c1fe7ea97';
-  const twilioPhoneNumber = '+18177178384'; // Your Twilio phone number
-
+  const token = '2d121ec8a9b06c231f703f1446af1c39';
+  const twilioPhoneNumber = '+18177178384'; 
+  
   const sendIssue = async () => {
     try {
       const credentials = base64Encode(`${sid}:${token}`);
