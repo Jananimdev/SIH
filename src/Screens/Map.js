@@ -172,7 +172,7 @@ function Map() {
           color="red"
         /> */}
         <Button
-          title="Continue"
+          title="CONTINUE"
             onPress={handleContinue}
           style={styles.but}
           color="red"
